@@ -1,0 +1,22 @@
+<?xml version="1.0"?>
+<launch>
+  <arg name="enable_gps_init" default="false" />
+  <arg name="cloud" default="" />
+  <node pkg="generate_lane" type="init" name="correct_gps" if="$(arg enable_gps_init)">
+    <remap from="/initialpose_mcl" to="/initialpose"/>
+    <param name="size" value="40"/>
+    <param name="cloud" value="$(arg cloud)"/>
+  </node>
+  <node pkg="generate_lane" name="image_gen" type="image">
+    <remap from="input" to="/point_cloud"/>
+    <remap from="output" to="/point_cloud_ground"/>
+    <param name="thres" value="0.9"/>
+  </node>
+  <node pkg="generate_lane" name="aggregate" type="aggregate" output="screen">
+    <remap from="input" to="/point_cloud_ground"/>
+    <param name="factor" value="5"/>
+    <param name="distance" value="0.07"/>
+    <param name="thres_lane" value="40"/>
+    <param name="min_point" value="2"/>
+  </node>
+</launch>

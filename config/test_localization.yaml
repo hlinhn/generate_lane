@@ -1,0 +1,33 @@
+mcl_3dl:
+  map_frame: "map"
+  accum_cloud: 1
+  lpf_step: 1.0
+  dist_weight_z: 2.0
+  resample_var_pitch: 0.1
+  resample_var_yaw: 0.005
+  odom_err_lin_ang: 0.08
+  map_downsample_x: 0.1
+  map_downsample_y: 0.1
+  map_downsample_z: 0.1
+  downsample_x: 0.1
+  downsample_y: 0.1
+  downsample_z: 0.1
+  update_downsample_x: 0.1
+  update_downsample_y: 0.1
+  update_downsample_z: 0.1
+  num_particles: 100
+  odom_err_ang_ang: 0.02
+  likelihood:
+    match_dist_min: 0.3
+    match_output_dist: 0.`
+    clip_far: 30
+    num_points: 300
+  #beam:
+    #num_points: 0
+obj_to_pointcloud:
+  frame_id: "map"
+  points_per_meter_sq: 1200.0
+  downsample_grid: 0.1
+pcd_to_pointcloud:
+  frame_id: "map"
+  latch: true
